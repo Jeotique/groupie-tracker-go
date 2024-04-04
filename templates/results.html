@@ -1,0 +1,36 @@
+{{define "search"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/static/artist.css">
+</head>
+<body>
+    <h1>Search Results</h1>
+    <div class="artist-list">
+        {{range .Artists.Items}}
+        <div class="artist">
+            <a target="_blank" href="{{.External_urls.Spotify}}">
+                <div class="album">
+                    <h2>{{.Name}}</h2>
+                    <p>Total Followers: {{.Followers.Total}}</p>
+                    <div class="images">
+                        {{if .Image}}
+                            {{ $mediumImage := index .Image 0 }}  <!-- Sélection de la première image (supposée moyenne) -->
+                            <img class="medium-image" src="{{ $mediumImage.URL }}" alt="Artist Image" style="max-width: 200px;">
+                        {{end}}
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{end}}
+    </div>
+    <div class="pagination">
+        <a href="#" class="prev">&laquo; Previous</a>
+        <a href="#" class="next">Next &raquo;</a>
+    </div>
+</body>
+</html>
+{{end}}
